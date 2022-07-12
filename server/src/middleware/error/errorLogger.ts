@@ -5,11 +5,11 @@ interface DynamicLog {
   [key: string]: any;
 }
 
-export default function errorLogger(
+export function errorLogger(
   error: HttpException,
   _req: Request,
   _res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   const errorLog: DynamicLog = { name: error.name };
 
