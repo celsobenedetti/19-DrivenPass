@@ -11,6 +11,6 @@ router.use(verifyJwtHeader);
 router.post("/wifi", validateBody(createWifiSchema), wifiController.create);
 router.get("/wifi", wifiController.findAll);
 router.get("/wifi/:id", wifiController.findOne);
-router.delete("/wifi/:id");
+router.delete("/wifi/:id", wifiController.deleteOne);
 
 export default router;

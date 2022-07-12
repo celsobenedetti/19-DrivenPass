@@ -49,7 +49,10 @@ const findOne = async (userId: number, wifiId: number) => {
   };
 };
 
-const deleteOne = async () => {};
+const deleteOne = async (userId: number, wifiId: number) => {
+  await findOne(userId, wifiId);
+  await prismaService.wifi.delete({ where: { id: wifiId } });
+};
 
 export default {
   create,

@@ -23,7 +23,12 @@ const findOne = async (req: ParamsIdReq, res: SignedUserRes) => {
   res.status(200).send(card);
 };
 
-const deleteOne = async () => {};
+const deleteOne = async (req: ParamsIdReq, res: SignedUserRes) => {
+  const { id: userId } = res.locals.user;
+  const { id: credentialId } = req.params;
+  await wifiService.deleteOne(+userId, +credentialId);
+  res.sendStatus(204);
+};
 
 export default {
   create,
