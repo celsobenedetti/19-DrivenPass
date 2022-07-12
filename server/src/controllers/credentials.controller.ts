@@ -5,11 +5,8 @@ import credentialsService from "../services/credentials.service";
 
 const create = async (req: CreateCredentialReq, res: SignedUserRes) => {
   const { id: userId } = res.locals.user;
-  const { title, url, username } = await credentialsService.createCredential(
-    +userId,
-    req.body,
-  );
-  res.status(201).send({ title, url, username });
+  await credentialsService.createCredential(+userId, req.body);
+  res.sendStatus(201);
 };
 
 const findAll = async (_req: Request, res: SignedUserRes) => {

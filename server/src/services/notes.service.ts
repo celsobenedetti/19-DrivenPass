@@ -11,7 +11,6 @@ const create = async (userId: number, data: createNoteDto) => {
 
   return prismaService.notes.create({
     data: { title, content, user_id: userId },
-    select: { title: true, content: true },
   });
 };
 

@@ -4,8 +4,8 @@ import notesService from "../services/notes.service";
 
 const create = async (req: CreateNoteReq, res: SignedUserRes) => {
   const { id: userId } = res.locals.user;
-  const newNote = await notesService.create(+userId, req.body);
-  res.status(201).send(newNote);
+  await notesService.create(+userId, req.body);
+  res.sendStatus(201);
 };
 
 export default {

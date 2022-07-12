@@ -20,7 +20,6 @@ const createCredential = async (userId: number, data: createCredentialDto) => {
 
   return prismaService.credential.create({
     data: { title, url, username, password: encryptedPassword, user_id: userId },
-    select: { title: true, url: true, username: true },
   });
 };
 
