@@ -8,3 +8,5 @@ export const SignUserSchema = z.object({
 });
 
 export type SignUserDto = z.infer<typeof SignUserSchema>;
+
+export type DecodedJwt = { id: string; email: string };

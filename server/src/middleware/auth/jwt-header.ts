@@ -1,0 +1,23 @@
+import { NextFunction, Response } from "express";
+import { UnauthorizedException } from "../../common/exceptions";
+import { decodeJwt } from "../../common/utils";
+import { JwtHeaderReq } from "../../models/auth";
+
+export default async function verifyJwtHeader(
+  req: JwtHeaderReq,
+  res: Response,
+  next: NextFunction,
+) {
+  const { authorization } = req.headers;
+  const token = authorization?.split(" ")[1];
+
+  if (!token) throw new UnauthorizedException();
+
+  try {
+    res.locals.user = decodeJwt(token);
+  } catch (err) {
+    throw new UnauthorizedException("Invalid jwt");
+  }
+
+  next();
+}

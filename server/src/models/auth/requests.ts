@@ -1,5 +1,5 @@
-import { Request } from "express";
-import { SignUserDto } from "./schemas";
+import { Request, Response } from "express";
+import { DecodedJwt, SignUserDto } from "./schemas";
 
 export interface SignUserReq extends Request {
   body: SignUserDto;
@@ -7,4 +7,10 @@ export interface SignUserReq extends Request {
 
 export interface JwtHeaderReq extends Request {
   headers: { authorization: string };
+}
+
+export interface SignedUserRes extends Response {
+  locals: {
+    user: DecodedJwt;
+  };
 }
