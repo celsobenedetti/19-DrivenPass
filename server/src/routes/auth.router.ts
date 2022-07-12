@@ -6,6 +6,6 @@ import { SignUserSchema } from "../models/user";
 const router = Router();
 
 router.post("/signup", validateBody(SignUserSchema), authController.createAccount);
-router.post("/signin", validateBody(SignUserSchema), authController.createAccount);
+router.post("/signin", validateBody(SignUserSchema), authController.signUserIn);
 
 export default router;

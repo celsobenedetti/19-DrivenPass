@@ -1,1 +1,2 @@
-export * from "./encryption/bcrypt";
+export * from "./auth/bcrypt";
+export * from "./auth/jwt";

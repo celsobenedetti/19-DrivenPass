@@ -1,25 +1,46 @@
-import { ConflictException } from "../common/exceptions";
+import {
+  ConflictException,
+  NotFoundException,
+  UnauthorizedException,
+} from "../common/exceptions";
 import { prismaService } from "../common/prisma";
-import { hashString } from "../common/utils";
+import * as utils from "../common/utils";
 import { SignUserDto } from "../models/user";
 
 const findUserByEmail = async (email: string) => {
   return prismaService.user.findUnique({ where: { email } });
 };
 
-const createUser = async (userData: SignUserDto) => {
+const create = async (userData: SignUserDto) => {
   const { email, password } = userData;
 
   if (await findUserByEmail(email)) {
     throw new ConflictException("Email already registered");
   }
 
-  const hashedPassword = await hashString(password);
+  const hashedPassword = await utils.hashString(password);
 
-  return prismaService.user.create({ data: { email, password: hashedPassword } });
+  const { id } = await prismaService.user.create({
+    data: { email, password: hashedPassword },
+  });
+
+  return { id, email };
+};
+
+const validateCredentials = async (userData: SignUserDto) => {
+  const { email, password } = userData;
+
+  const user = await findUserByEmail(email);
+
+  if (!user) throw new NotFoundException("Email not registered");
+  if (!utils.compareHash(password, user.password))
+    throw new UnauthorizedException("Invalid credentials");
+
+  return utils.createJwt(user);
 };
 
 export default {
   findUserByEmail,
-  createUser,
+  create,
+  validateCredentials,
 };
