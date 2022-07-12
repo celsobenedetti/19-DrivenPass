@@ -38,8 +38,14 @@ const findOne = async (userId: number, noteId: number) => {
   return note;
 };
 
+const deleteOne = async (userId: number, noteId: number) => {
+  await findOne(userId, noteId);
+  await prismaService.notes.delete({ where: { id: noteId } });
+};
+
 export default {
   create,
   findAll,
   findOne,
+  deleteOne,
 };

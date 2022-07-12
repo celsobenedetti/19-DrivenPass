@@ -11,6 +11,6 @@ router.use(verifyJwtHeader);
 router.post("/notes", validateBody(CreateNoteSchema), notesController.create);
 router.get("/notes", notesController.findAll);
 router.get("/notes/:id", notesController.findOne);
-router.delete("/notes/:id");
+router.delete("/notes/:id", notesController.deleteOne);
 
 export default router;

@@ -23,8 +23,17 @@ const findOne = async (req: ParamsIdReq, res: SignedUserRes) => {
   res.status(200).send(note);
 };
 
+const deleteOne = async (req: ParamsIdReq, res: SignedUserRes) => {
+  const { id: userId } = res.locals.user;
+  const { id: noteId } = req.params;
+  await notesService.deleteOne(+userId, +noteId);
+
+  res.sendStatus(204);
+};
+
 export default {
   create,
   findAll,
   findOne,
+  deleteOne,
 };
