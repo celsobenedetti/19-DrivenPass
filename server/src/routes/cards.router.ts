@@ -11,6 +11,6 @@ router.use(verifyJwtHeader);
 router.post("/cards", validateBody(createCardSchema), cardsController.create);
 router.get("/cards", cardsController.findAll);
 router.get("/cards/:id", cardsController.findOne);
-router.delete("/cards/:id");
+router.delete("/cards/:id", cardsController.deleteOne);
 
 export default router;

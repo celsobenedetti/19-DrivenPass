@@ -56,7 +56,11 @@ const findOne = async (userId: number, cardId: number) => {
     securityCode: utils.decryptString(securityCode),
   };
 };
-const deleteOne = async () => {};
+
+const deleteOne = async (userId: number, cardId: number) => {
+  await findOne(userId, cardId);
+  await prismaService.cards.delete({ where: { id: cardId } });
+};
 
 export default {
   create,
