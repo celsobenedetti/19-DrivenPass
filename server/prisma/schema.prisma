@@ -15,7 +15,8 @@ model User {
   email    String @unique
   password String
 
-  credentials Credential[]
+  Credentials Credential[]
+  Notes       Notes[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -27,6 +28,18 @@ model Credential {
   url      String
   username String
   password String
+
+  user_id Int
+  user    User @relation(fields: [user_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Notes {
+  id      Int    @id @default(autoincrement())
+  title   String @unique
+  content String
 
   user_id Int
   user    User @relation(fields: [user_id], references: [id])
