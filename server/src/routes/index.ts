@@ -1,9 +1,12 @@
 import { Request, Response, Router } from "express";
+import authRouter from "./auth.router";
 
-const AppRouter = Router();
+const appRouter = Router();
 
-AppRouter.get("/", (_req: Request, res: Response) =>
-  res.status(200).send("Hello from Driven Pass")
+appRouter.get("/", (_req: Request, res: Response) =>
+  res.status(200).send("Hello from Driven Pass"),
 );
 
-export default AppRouter;
+appRouter.use(authRouter);
+
+export default appRouter;

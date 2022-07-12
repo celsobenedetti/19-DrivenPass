@@ -30,6 +30,12 @@ export class NotFoundException extends HttpException {
   }
 }
 
+export class ConflictException extends HttpException {
+  constructor(response?: Res) {
+    super(409, response || "Conflict");
+  }
+}
+
 export class UnprocessableEntityException extends HttpException {
   constructor(response?: Res) {
     super(422, response || "Unprocessable Entity");
