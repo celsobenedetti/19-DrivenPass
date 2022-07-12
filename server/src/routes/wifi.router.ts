@@ -9,7 +9,7 @@ const router = Router();
 router.use(verifyJwtHeader);
 
 router.post("/wifi", validateBody(createWifiSchema), wifiController.create);
-router.get("/wifi");
+router.get("/wifi", wifiController.findAll);
 router.get("/wifi/:id");
 router.delete("/wifi/:id");
 

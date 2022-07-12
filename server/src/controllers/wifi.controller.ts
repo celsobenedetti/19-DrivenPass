@@ -9,8 +9,14 @@ const create = async (req: CreateWifiReq, res: SignedUserRes) => {
   res.sendStatus(201);
 };
 
-const findAll = async (req: Request, res: SignedUserRes) => {};
+const findAll = async (_req: Request, res: SignedUserRes) => {
+  const { id: userId } = res.locals.user;
+  const wifis = await wifiService.findAll(+userId);
+  res.status(200).send(wifis);
+};
+
 const findOne = async () => {};
+
 const deleteOne = async () => {};
 
 export default {
