@@ -43,8 +43,6 @@ const findOne = async (userId: number, credentialId: number) => {
     where: { id: credentialId },
   });
 
-  console.log({ credential, credentialId });
-
   if (!credential) throw new NotFoundException();
   if (credential.user_id !== userId)
     throw new UnauthorizedException("Credential does not belong to user");
@@ -56,8 +54,14 @@ const findOne = async (userId: number, credentialId: number) => {
   };
 };
 
+const deleteOne = async (userId: number, credentialId: number) => {
+  await findOne(userId, credentialId);
+  await prismaService.credential.delete({ where: { id: credentialId } });
+};
+
 export default {
   createCredential,
   findAll,
   findOne,
+  deleteOne,
 };

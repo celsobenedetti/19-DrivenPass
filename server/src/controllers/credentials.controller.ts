@@ -26,8 +26,15 @@ const findOne = async (req: ParamsIdReq, res: SignedUserRes) => {
   res.status(200).send(credential);
 };
 
+const deleteOne = async (req: ParamsIdReq, res: SignedUserRes) => {
+  const { id: userId } = res.locals.user;
+  const { id: credentialId } = req.params;
+  credentialsService.deleteOne(+userId, +credentialId);
+};
+
 export default {
   create,
   findAll,
   findOne,
+  deleteOne,
 };

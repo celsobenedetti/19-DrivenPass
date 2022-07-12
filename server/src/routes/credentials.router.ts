@@ -15,5 +15,6 @@ router.post(
 
 router.get("/credentials", verifyJwtHeader, credentialsController.findAll);
 router.get("/credentials/:id", verifyJwtHeader, credentialsController.findOne);
+router.delete("/credentials/:id", verifyJwtHeader, credentialsController.deleteOne);
 
 export default router;
