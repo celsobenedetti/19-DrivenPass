@@ -5,7 +5,7 @@ import {
 } from "../common/exceptions";
 import { prismaService } from "../common/prisma";
 import * as utils from "../common/utils";
-import { SignUserDto } from "../models/user";
+import { SignUserDto } from "../models/auth";
 
 const findUserByEmail = async (email: string) => {
   return prismaService.user.findUnique({ where: { email } });

@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { SignUserReq } from "../models/user";
+import { SignUserReq } from "../models/auth";
 import userService from "../services/user.service";
 
 const createAccount = async (req: SignUserReq, res: Response) => {
