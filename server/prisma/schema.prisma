@@ -17,6 +17,7 @@ model User {
 
   Credentials Credential[]
   Notes       Notes[]
+  Cards       Cards[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -46,4 +47,28 @@ model Notes {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+}
+
+model Cards {
+  id             Int      @id @default(autoincrement())
+  title          String   @unique
+  number         String
+  cardholderName String
+  securityCode   String
+  expirationDate String
+  password       String
+  isVirtual      Boolean
+  type           CardType
+
+  user_id Int
+  user    User @relation(fields: [user_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+enum CardType {
+  CREDIT
+  DEBIT
+  BOTH
 }
