@@ -10,7 +10,10 @@ router.post(
   "/credentials",
   verifyJwtHeader,
   validateBody(CreateCredentialSchema),
-  credentialsController.createCredential,
+  credentialsController.create,
 );
+
+router.get("/credentials", verifyJwtHeader, credentialsController.findAll);
+router.get("/credentials/:id", verifyJwtHeader, credentialsController.findOne);
 
 export default router;
