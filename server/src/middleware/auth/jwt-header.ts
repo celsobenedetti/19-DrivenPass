@@ -11,7 +11,7 @@ export default async function verifyJwtHeader(
   const { authorization } = req.headers;
   const token = authorization?.split(" ")[1];
 
-  if (!token) throw new UnauthorizedException();
+  if (!token) throw new UnauthorizedException("Bearer token header required");
 
   try {
     res.locals.user = decodeJwt(token);

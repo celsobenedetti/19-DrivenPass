@@ -29,7 +29,8 @@ const findOne = async (req: ParamsIdReq, res: SignedUserRes) => {
 const deleteOne = async (req: ParamsIdReq, res: SignedUserRes) => {
   const { id: userId } = res.locals.user;
   const { id: credentialId } = req.params;
-  credentialsService.deleteOne(+userId, +credentialId);
+  await credentialsService.deleteOne(+userId, +credentialId);
+  res.sendStatus(204);
 };
 
 export default {
