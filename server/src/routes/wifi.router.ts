@@ -10,7 +10,7 @@ router.use(verifyJwtHeader);
 
 router.post("/wifi", validateBody(createWifiSchema), wifiController.create);
 router.get("/wifi", wifiController.findAll);
-router.get("/wifi/:id");
+router.get("/wifi/:id", wifiController.findOne);
 router.delete("/wifi/:id");
 
 export default router;

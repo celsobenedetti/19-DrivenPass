@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { SignedUserRes } from "../models/auth";
+import { ParamsIdReq, SignedUserRes } from "../models/auth";
 import { CreateWifiReq } from "../models/wifi";
 import wifiService from "../services/wifi.service";
 
@@ -15,7 +15,13 @@ const findAll = async (_req: Request, res: SignedUserRes) => {
   res.status(200).send(wifis);
 };
 
-const findOne = async () => {};
+const findOne = async (req: ParamsIdReq, res: SignedUserRes) => {
+  const { id: userId } = res.locals.user;
+  const { id: credentialId } = req.params;
+  const card = await wifiService.findOne(+userId, +credentialId);
+
+  res.status(200).send(card);
+};
 
 const deleteOne = async () => {};
 

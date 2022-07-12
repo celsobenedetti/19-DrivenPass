@@ -1,4 +1,8 @@
-import { ConflictException } from "../common/exceptions";
+import {
+  ConflictException,
+  NotFoundException,
+  UnauthorizedException,
+} from "../common/exceptions";
 import { prismaService } from "../common/prisma";
 import * as utils from "../common/utils";
 import { createWifiDto } from "../models/wifi";
@@ -29,7 +33,22 @@ const findAll = async (userId: number) => {
   });
 };
 
-const findOne = async () => {};
+const findOne = async (userId: number, wifiId: number) => {
+  const wifi = await prismaService.wifi.findUnique({
+    select: { title: true, network: true, password: true, user_id: true },
+    where: { id: wifiId },
+  });
+
+  if (!wifi) throw new NotFoundException();
+  if (wifi.user_id !== userId)
+    throw new UnauthorizedException("Card does not belong to user");
+
+  return {
+    ...wifi,
+    password: utils.decryptString(wifi.password),
+  };
+};
+
 const deleteOne = async () => {};
 
 export default {
