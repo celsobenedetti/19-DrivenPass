@@ -9,8 +9,8 @@ const router = Router();
 router.use(verifyJwtHeader);
 
 router.post("/notes", validateBody(CreateNoteSchema), notesController.create);
-router.get("/notes");
-router.get("/notes/:id");
+router.get("/notes", notesController.findAll);
+router.get("/notes/:id", notesController.findOne);
 router.delete("/notes/:id");
 
 export default router;
