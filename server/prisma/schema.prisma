@@ -22,6 +22,7 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   Wifi       Wifi[]
+  Docs       Docs[]
 }
 
 model Credential {
@@ -81,8 +82,25 @@ model Wifi {
   updated_at DateTime @updatedAt
 }
 
+model Docs {
+  id     Int     @id @default(autoincrement())
+  number String  @unique
+  type   DocType
+
+  user_id Int
+  user    User @relation(fields: [user_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
 enum CardType {
   CREDIT
   DEBIT
   BOTH
+}
+
+enum DocType {
+  RG
+  CNH
 }
