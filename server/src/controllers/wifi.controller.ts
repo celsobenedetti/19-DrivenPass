@@ -17,16 +17,16 @@ const findAll = async (_req: Request, res: SignedUserRes) => {
 
 const findOne = async (req: ParamsIdReq, res: SignedUserRes) => {
   const { id: userId } = res.locals.user;
-  const { id: credentialId } = req.params;
-  const card = await wifiService.findOne(+userId, +credentialId);
+  const { id: wifiId } = req.params;
+  const card = await wifiService.findOne(+userId, +wifiId);
 
   res.status(200).send(card);
 };
 
 const deleteOne = async (req: ParamsIdReq, res: SignedUserRes) => {
   const { id: userId } = res.locals.user;
-  const { id: credentialId } = req.params;
-  await wifiService.deleteOne(+userId, +credentialId);
+  const { id: wifiId } = req.params;
+  await wifiService.deleteOne(+userId, +wifiId);
   res.sendStatus(204);
 };
 
