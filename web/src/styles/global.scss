@@ -1,11 +1,15 @@
-@import "./setup/resets";
-@import "./setup/variables";
-@import "./setup/mixins";
-
-@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap"); //font-family: "Righteous", cursive;
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Recursive&display=swap");
 
 html {
   background-color: $bg-light;
+}
+
+main.page-wrapper {
   font-family: "Recursive", sans-serif;
+
+  @include flex($justify: space-between);
+  height: 100vh;
+
+  padding: 1rem 0;
 }
