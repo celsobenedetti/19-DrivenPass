@@ -8,35 +8,48 @@
     <button>{{ isSignUp ? "Sign Up" : "Login" }}</button>
     <button
       v-if="isSignUp"
-      class="button-back"
+      class="button-alert"
       @click="() => $router.push('signin')"
     >
       &lt; Go back
     </button>
+
     <div v-else class="link-wrapper">
       <hr />
       <router-link to="/signup">Don't have an account? Sign up</router-link>
     </div>
   </form>
+
+  <ModalAlert
+    v-if="shouldDisplayAlert"
+    title="Deu ruim"
+    content="Modal content"
+    @close-modal="() => (shouldDisplayAlert = false)"
+  />
 </template>
 
 <script lang="ts">
 import { SignFormProps, SignPageTypes } from "@/common/types";
+import ModalAlert from "@/components/ModalAlert.vue";
 import { ref } from "vue";
 
 export default {
   props: {
     pageType: String,
   },
+  components: {
+    ModalAlert,
+  },
   setup(props: SignFormProps) {
     const isSignUp = props.pageType === SignPageTypes.SIGNUP;
+    const shouldDisplayAlert = ref(false);
 
     const input = ref({
       email: "",
       password: "",
     });
 
-    return { input, isSignUp };
+    return { input, isSignUp, shouldDisplayAlert };
   },
 };
 </script>
