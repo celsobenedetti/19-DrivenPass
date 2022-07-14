@@ -5,18 +5,18 @@ CREATE TYPE "CardType" AS ENUM ('CREDIT', 'DEBIT', 'BOTH');
 CREATE TYPE "DocType" AS ENUM ('RG', 'CNH');
 
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Credential" (
+CREATE TABLE "credentials" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "url" TEXT NOT NULL,
@@ -26,11 +26,11 @@ CREATE TABLE "Credential" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Credential_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "credentials_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Notes" (
+CREATE TABLE "notes" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
@@ -38,11 +38,11 @@ CREATE TABLE "Notes" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Notes_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "notes_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Cards" (
+CREATE TABLE "cards" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "number" TEXT NOT NULL,
@@ -56,11 +56,11 @@ CREATE TABLE "Cards" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Cards_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "cards_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Wifi" (
+CREATE TABLE "wifis" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "network" TEXT NOT NULL,
@@ -69,11 +69,11 @@ CREATE TABLE "Wifi" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Wifi_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "wifis_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Docs" (
+CREATE TABLE "docs" (
     "id" SERIAL NOT NULL,
     "number" TEXT NOT NULL,
     "type" "DocType" NOT NULL,
@@ -81,38 +81,44 @@ CREATE TABLE "Docs" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Docs_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "docs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Credential_title_key" ON "Credential"("title");
+CREATE UNIQUE INDEX "credentials_user_id_title_key" ON "credentials"("user_id", "title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Notes_title_key" ON "Notes"("title");
+CREATE UNIQUE INDEX "notes_title_key" ON "notes"("title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Cards_title_key" ON "Cards"("title");
+CREATE UNIQUE INDEX "notes_user_id_title_key" ON "notes"("user_id", "title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Wifi_title_key" ON "Wifi"("title");
+CREATE UNIQUE INDEX "cards_user_id_title_key" ON "cards"("user_id", "title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Docs_number_key" ON "Docs"("number");
+CREATE UNIQUE INDEX "wifis_user_id_title_key" ON "wifis"("user_id", "title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "docs_number_key" ON "docs"("number");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "docs_user_id_type_key" ON "docs"("user_id", "type");
 
 -- AddForeignKey
-ALTER TABLE "Credential" ADD CONSTRAINT "Credential_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "credentials" ADD CONSTRAINT "credentials_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Notes" ADD CONSTRAINT "Notes_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "notes" ADD CONSTRAINT "notes_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Cards" ADD CONSTRAINT "Cards_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "cards" ADD CONSTRAINT "cards_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Wifi" ADD CONSTRAINT "Wifi_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "wifis" ADD CONSTRAINT "wifis_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Docs" ADD CONSTRAINT "Docs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "docs" ADD CONSTRAINT "docs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

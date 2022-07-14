@@ -16,18 +16,20 @@ model User {
   password String
 
   Credentials Credential[]
-  Notes       Notes[]
-  Cards       Cards[]
+  Notes       Note[]
+  Cards       Card[]
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
   Wifi       Wifi[]
-  Docs       Docs[]
+  Documents  Document[]
+
+  @@map("users")
 }
 
 model Credential {
   id       Int    @id @default(autoincrement())
-  title    String @unique
+  title    String
   url      String
   username String
   password String
@@ -37,9 +39,12 @@ model Credential {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@unique([user_id, title])
+  @@map("credentials")
 }
 
-model Notes {
+model Note {
   id      Int    @id @default(autoincrement())
   title   String @unique
   content String
@@ -49,11 +54,14 @@ model Notes {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@unique([user_id, title])
+  @@map("notes")
 }
 
-model Cards {
+model Card {
   id             Int      @id @default(autoincrement())
-  title          String   @unique
+  title          String
   number         String
   cardholderName String
   securityCode   String
@@ -67,11 +75,14 @@ model Cards {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@unique([user_id, title])
+  @@map("cards")
 }
 
 model Wifi {
   id       Int    @id @default(autoincrement())
-  title    String @unique
+  title    String
   network  String
   password String
 
@@ -80,9 +91,12 @@ model Wifi {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@unique([user_id, title])
+  @@map("wifis")
 }
 
-model Docs {
+model Document {
   id     Int     @id @default(autoincrement())
   number String  @unique
   type   DocType
@@ -92,6 +106,9 @@ model Docs {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@unique([user_id, type])
+  @@map("docs")
 }
 
 enum CardType {
