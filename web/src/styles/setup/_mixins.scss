@@ -15,3 +15,14 @@
   border-radius: $bd-radius-sm;
   box-shadow: $shadow-one;
 }
+
+@mixin button($color: $success-light) {
+  @include input;
+  font-weight: 600;
+  border: none;
+  background: $color;
+
+  &.button-alert {
+    background: $alert-light;
+  }
+}
