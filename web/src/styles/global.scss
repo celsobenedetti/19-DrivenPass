@@ -8,8 +8,6 @@ html {
 main.page-wrapper {
   font-family: "Recursive", sans-serif;
 
-  @include flex($justify: space-between);
+  @include flex;
   height: 100vh;
-
-  padding: 1rem 0;
 }

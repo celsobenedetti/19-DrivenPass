@@ -5,3 +5,13 @@
   align-items: $align;
   gap: $gap;
 }
+
+@mixin input() {
+  font-family: "Recursive", sans-serif;
+  font-size: $font-sm;
+  width: $input-w;
+  height: $input-h;
+  padding: 10px;
+  border-radius: $bd-radius-sm;
+  box-shadow: $shadow-one;
+}
