@@ -15,6 +15,7 @@ form {
 
   button {
     @include input;
+    font-weight: 600;
     border: none;
     background: $success-light;
 
