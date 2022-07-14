@@ -4,13 +4,13 @@
       <font-awesome-icon icon="fa-lock" />
       <h1>DrivenPass</h1>
     </div>
-    <SignPageForm :pageType="SignPageTypes.SIGNUP" />
+    <SignPageForm :pageType="SignPageTypes.SIGNIN" />
   </main>
 </template>
 
 <script lang="ts">
-import SignPageForm from "@/components/SignPageForm.vue";
 import { SignPageTypes } from "@/common/types";
+import SignPageForm from "@/components/SignPageForm.vue";
 
 export default {
   components: {

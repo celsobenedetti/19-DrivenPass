@@ -1,0 +1,42 @@
+form {
+  @include flex($gap: 1rem);
+  width: 100vw;
+  height: 50%;
+  font-size: $font-md1;
+
+  input {
+    @include input;
+    border: 1px solid $primary;
+
+    &:focus {
+      background-color: lighten($color: $primary, $amount: 70);
+    }
+  }
+
+  button {
+    @include input;
+    border: none;
+    background: $success-light;
+
+    &.button-back {
+      background: $alert-light;
+    }
+  }
+
+  .link-wrapper {
+    @include flex;
+
+    hr {
+      display: block;
+      height: 1px;
+      width: 291px;
+      border-top: 1px solid $dark-1;
+      margin: 10px;
+    }
+
+    a {
+      color: #000;
+      margin: 10px;
+    }
+  }
+}

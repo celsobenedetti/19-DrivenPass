@@ -1,0 +1,12 @@
+div.logo-wrapper {
+  font-family: "Righteous", cursive;
+  @include flex($gap: 1rem);
+  margin: 5% auto;
+
+  color: $primary;
+  font-size: $font-lg;
+
+  svg {
+    font-size: $font-humungus;
+  }
+}
