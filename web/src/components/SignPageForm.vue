@@ -1,11 +1,46 @@
-<template>
-  <form @submit.prevent="onSubmit">
-    <label for="username">Email </label>
-    <input type="text" name="username" v-model="input.email" required />
-    <label for="password">Password </label>
-    <input type="text" name="password" v-model="input.password" required />
+<script lang="ts">
+import { SignFormProps, SignPageTypes } from "@/common/types";
+import ModalAlert from "@/components/ModalAlert.vue";
+import { validateForm } from "@/utils/validation/signFormValidation";
+import { computed } from "@vue/reactivity";
+import { ref } from "vue";
 
-    <button>{{ isSignUp ? "Sign Up" : "Login" }}</button>
+export default {
+  props: {
+    pageType: String,
+  },
+  components: {
+    ModalAlert,
+  },
+  setup(props: SignFormProps) {
+    const isSignUp = props.pageType === SignPageTypes.SIGNUP;
+
+    const input = ref({
+      email: "",
+      password: "",
+    });
+
+    const formErrors = ref("");
+
+    const handleSubmit = computed(() => {
+      const errorMessage = validateForm(input.value);
+      if (errorMessage) formErrors.value = errorMessage;
+    });
+
+    return { input, isSignUp, handleSubmit, formErrors };
+  },
+};
+</script>
+
+<template>
+  <form @submit.prevent="handleSubmit">
+    <label for="username">Email </label>
+    <input v-model="input.email" name="email" type="text" required />
+    <label for="password">Password </label>
+    <input v-model="input.password" name="password" type="text" required />
+
+    <button @click="handleSubmit">{{ isSignUp ? "Sign Up" : "Login" }}</button>
+
     <button
       v-if="isSignUp"
       class="button-alert"
@@ -21,38 +56,12 @@
   </form>
 
   <ModalAlert
-    v-if="shouldDisplayAlert"
-    title="Deu ruim"
-    content="Modal content"
-    @close-modal="() => (shouldDisplayAlert = false)"
+    v-if="formErrors"
+    title="Invalid input"
+    :content="formErrors"
+    @close-modal="() => (formErrors = '')"
   />
 </template>
-
-<script lang="ts">
-import { SignFormProps, SignPageTypes } from "@/common/types";
-import ModalAlert from "@/components/ModalAlert.vue";
-import { ref } from "vue";
-
-export default {
-  props: {
-    pageType: String,
-  },
-  components: {
-    ModalAlert,
-  },
-  setup(props: SignFormProps) {
-    const isSignUp = props.pageType === SignPageTypes.SIGNUP;
-    const shouldDisplayAlert = ref(false);
-
-    const input = ref({
-      email: "",
-      password: "",
-    });
-
-    return { input, isSignUp, shouldDisplayAlert };
-  },
-};
-</script>
 
 <style scoped lang="scss">
 @import "@/styles/components/SignPageFormStyle";

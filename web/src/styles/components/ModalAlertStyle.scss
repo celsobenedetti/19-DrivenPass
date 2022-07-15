@@ -18,6 +18,11 @@
       font-weight: 700;
     }
 
+    p {
+      white-space: pre-line;
+      text-align: center;
+    }
+
     button {
       @include button;
     }
