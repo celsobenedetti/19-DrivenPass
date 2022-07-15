@@ -15,7 +15,7 @@ const formInputSchema = z.object({
     .min(10, { message: "Password must be at least 10 characters long" }),
 });
 
-type FormInput = z.infer<typeof formInputSchema>;
+export type FormInput = z.infer<typeof formInputSchema>;
 
 export const validateForm = (input: FormInput) => {
   try {
