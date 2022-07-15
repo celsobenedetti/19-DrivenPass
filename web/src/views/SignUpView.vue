@@ -1,9 +1,5 @@
 <template>
   <main class="page-wrapper">
-    <div class="logo-wrapper">
-      <font-awesome-icon icon="fa-lock" />
-      <h1>DrivenPass</h1>
-    </div>
     <SignPageForm :pageType="SignPageTypes.SIGNUP" />
   </main>
 </template>
@@ -22,6 +18,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-@import "@/styles/views/SignPageViewStyle";
-</style>
+<style scoped lang="scss"></style>
