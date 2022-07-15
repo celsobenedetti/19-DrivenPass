@@ -1,7 +1,7 @@
 form {
   @include flex($gap: 1rem);
   width: 100vw;
-  height: 50%;
+  height: 55%;
   font-size: $font-md1;
 
   input {
@@ -25,12 +25,13 @@ form {
       height: 1px;
       width: 291px;
       border-top: 1px solid $dark-1;
-      margin: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
     }
 
     a {
-      color: #000;
-      margin: 10px;
+      margin-top: 10px;
+      color: darken($color: $primary, $amount: 15);
     }
   }
 }
