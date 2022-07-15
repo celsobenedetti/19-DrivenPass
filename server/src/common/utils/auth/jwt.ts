@@ -3,8 +3,7 @@ import { DecodedJwt, User } from "../../../models/auth";
 
 const SECRET = process.env.ENCRYPTION_SECRET + "";
 
-export const createJwt = (user: User) => {
-  const { id, email } = user;
+export const createJwt = (id: number, email: string) => {
   return jwt.sign({ id, email }, SECRET, { expiresIn: "10h" });
 };
 

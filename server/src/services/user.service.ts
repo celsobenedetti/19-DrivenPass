@@ -24,7 +24,7 @@ const create = async (userData: SignUserDto) => {
     data: { email, password: hashedPassword },
   });
 
-  return { id, email };
+  return utils.createJwt(id, email);
 };
 
 const validateCredentials = async (userData: SignUserDto) => {
@@ -36,7 +36,7 @@ const validateCredentials = async (userData: SignUserDto) => {
   if (!utils.compareHash(password, user.password))
     throw new UnauthorizedException("Invalid credentials");
 
-  return utils.createJwt(user);
+  return utils.createJwt(user.id, email);
 };
 
 export default {
