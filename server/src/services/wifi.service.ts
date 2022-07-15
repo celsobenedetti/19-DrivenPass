@@ -9,7 +9,14 @@ import { createWifiDto } from "../models/wifi";
 
 const create = async (userId: number, data: createWifiDto) => {
   const { title, network, password } = data;
-  const existingWifi = await prismaService.wifi.findUnique({ where: { title } });
+  const existingWifi = await prismaService.wifi.findUnique({
+    where: {
+      user_id_title: {
+        title,
+        user_id: userId,
+      },
+    },
+  });
 
   if (existingWifi)
     throw new ConflictException(`Wifi already exists with title ${title}`);

@@ -10,7 +10,12 @@ import { createCredentialDto } from "../models/credentials";
 const createCredential = async (userId: number, data: createCredentialDto) => {
   const { title, url, password, username } = data;
   const existingCredential = await prismaService.credential.findUnique({
-    where: { title },
+    where: {
+      user_id_title: {
+        title,
+        user_id: userId,
+      },
+    },
   });
 
   if (existingCredential)

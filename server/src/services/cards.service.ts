@@ -8,8 +8,13 @@ import * as utils from "../common/utils";
 import { createCardDto, findCardFilter } from "../models/cards";
 
 const create = async (userId: number, data: createCardDto) => {
-  const existingCard = await prismaService.cards.findUnique({
-    where: { title: data.title },
+  const existingCard = await prismaService.card.findUnique({
+    where: {
+      user_id_title: {
+        title: data.title,
+        user_id: userId,
+      },
+    },
   });
 
   if (existingCard)
@@ -21,11 +26,11 @@ const create = async (userId: number, data: createCardDto) => {
     securityCode: utils.encryptString(data.securityCode),
     user_id: userId,
   };
-  return prismaService.cards.create({ data: insertData });
+  return prismaService.card.create({ data: insertData });
 };
 
 const findAll = async (userId: number) => {
-  const cards = await prismaService.cards.findMany({
+  const cards = await prismaService.card.findMany({
     select: findCardFilter,
     where: { user_id: userId },
   });
@@ -40,7 +45,7 @@ const findAll = async (userId: number) => {
 };
 
 const findOne = async (userId: number, cardId: number) => {
-  const card = await prismaService.cards.findUnique({
+  const card = await prismaService.card.findUnique({
     select: { ...findCardFilter, user_id: true },
     where: { id: cardId },
   });
@@ -59,7 +64,7 @@ const findOne = async (userId: number, cardId: number) => {
 
 const deleteOne = async (userId: number, cardId: number) => {
   await findOne(userId, cardId);
-  await prismaService.cards.delete({ where: { id: cardId } });
+  await prismaService.card.delete({ where: { id: cardId } });
 };
 
 export default {

@@ -91,9 +91,6 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "credentials_user_id_title_key" ON "credentials"("user_id", "title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "notes_title_key" ON "notes"("title");
-
--- CreateIndex
 CREATE UNIQUE INDEX "notes_user_id_title_key" ON "notes"("user_id", "title");
 
 -- CreateIndex

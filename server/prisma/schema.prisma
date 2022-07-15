@@ -46,7 +46,7 @@ model Credential {
 
 model Note {
   id      Int    @id @default(autoincrement())
-  title   String @unique
+  title   String
   content String
 
   user_id Int
