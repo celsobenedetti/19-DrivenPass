@@ -3,11 +3,10 @@
 
 html {
   background-color: $bg-light;
+  font-family: "Recursive", sans-serif;
 }
 
 main.page-wrapper {
-  font-family: "Recursive", sans-serif;
-
   @include flex;
   height: 100vh;
 

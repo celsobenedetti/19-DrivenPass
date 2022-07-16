@@ -7,13 +7,13 @@
 
 <style lang="scss">
 div.logo-wrapper {
-  font-family: "Righteous", cursive;
   @include flex($gap: 1rem);
   margin: 5% auto;
 
   color: $primary;
 
   h1 {
+    font-family: "Righteous", cursive;
     font-size: $font-lg;
   }
 
