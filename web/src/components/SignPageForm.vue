@@ -3,7 +3,7 @@ import { SignFormProps, SignPageTypes } from "@/common/types";
 import ModalAlert from "@/components/ModalAlert.vue";
 import LockLogo from "@/components/LockLogo.vue";
 import { ref, defineComponent, PropType } from "vue";
-import { FormInput, validateForm } from "@/common/utils/validation";
+import { validateForm, IFormInput } from "@/common/utils/validation";
 import { postData } from "@/common/utils/axios";
 import accessToken from "@/global/apiAccessToken";
 import router from "@/router";
@@ -20,22 +20,35 @@ export default defineComponent({
   setup(props: SignFormProps | any) {
     const isSignUp = props.pageType === SignPageTypes.SIGNUP;
 
-    const input = ref<FormInput>({
+    const input = ref<IFormInput>({
       email: "",
       password: "",
     });
 
-    const formErrors = ref("");
-    const requestError = ref("");
-    const isLoading = ref(false);
+    const errorMessage = ref({
+      title: "",
+      content: "",
+    });
 
-    return { isSignUp, input, formErrors, isLoading, requestError };
+    const isLoading = ref(true);
+
+    return {
+      isSignUp,
+      input,
+      isLoading,
+      errorMessage,
+    };
   },
 
   methods: {
     async handleSubmit() {
       const errorMessage = validateForm(this.input);
-      if (errorMessage) return (this.formErrors = errorMessage);
+      if (errorMessage) {
+        return this.alertErrors({
+          title: "Invalid input",
+          content: errorMessage,
+        });
+      }
 
       const endpoint = this.isSignUp ? "signup" : "signin";
 
@@ -43,11 +56,26 @@ export default defineComponent({
       const { data, error } = await postData(endpoint, this.input);
       this.isLoading = false;
 
-      if (error) return (this.requestError = error.message);
+      if (error) {
+        return this.alertErrors({
+          title: "Request was unsuccessful",
+          content: error.message,
+        });
+      }
 
-      accessToken.setToken(data);
+      accessToken.setToken(data.token);
       router.push("/");
     },
+
+    alertErrors(error: { title: string; content: string }) {
+      this.errorMessage = error;
+    },
+  },
+
+  async mounted() {
+    const token = await accessToken.validateCachedToken();
+    if (token) router.push("/");
+    else this.isLoading = false;
   },
 });
 </script>
@@ -80,17 +108,10 @@ export default defineComponent({
   </form>
 
   <ModalAlert
-    v-if="formErrors"
-    title="Invalid input"
-    :content="formErrors"
-    @close-modal="formErrors = ''"
-  />
-
-  <ModalAlert
-    v-if="requestError"
-    title="Request was unsuccessful"
-    :content="requestError"
-    @close-modal="requestError = ''"
+    v-if="errorMessage.content"
+    :title="errorMessage.title"
+    :content="errorMessage.content"
+    @close-modal="errorMessage = {}"
   />
 </template>
 

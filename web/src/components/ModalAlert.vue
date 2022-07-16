@@ -3,7 +3,7 @@
     <div class="modal">
       <h1>{{ title }}</h1>
       <p>{{ content }}</p>
-      <button @click="$emit('close-modal')">Ok :(</button>
+      <button @click="$emit('close-modal')">Ok</button>
     </div>
   </div>
 </template>

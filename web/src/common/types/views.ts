@@ -5,4 +5,5 @@ export enum SignPageTypes {
 
 export interface SignFormProps {
   pageType: SignPageTypes;
+  apiEndpoint: string;
 }
