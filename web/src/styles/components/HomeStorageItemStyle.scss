@@ -1,0 +1,30 @@
+div.item-wrapper {
+  @include flex($direction: row, $justify: space-between, $align: start);
+  padding: $padding-2 $padding-4;
+  color: $primary;
+
+  div.icon-title-wrapper {
+    @include flex($direction: row, $justify: flex-start);
+    font-size: $font-lg;
+    cursor: pointer;
+
+    div.icon-wrapper {
+      width: 70px;
+      @include flex;
+    }
+
+    h1 {
+      font-size: $font-ml;
+      color: $primary-dark;
+      margin-left: 2rem;
+    }
+  }
+
+  p.item-count {
+    color: $text-light;
+    background-color: $primary;
+    padding: $padding-1;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

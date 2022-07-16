@@ -1,12 +1,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import router from "@/router";
+import currentPageTitle from "@/global/currentPageTitle";
 
 import accessToken from "@/global/apiAccessToken";
 
 export default defineComponent({
-  props: {
-    pageTitle: String,
+  setup() {
+    const pageTitle = currentPageTitle.getTitle;
+    return { pageTitle };
   },
   methods: {
     logUserOut() {
@@ -15,6 +17,9 @@ export default defineComponent({
     redirectHome() {
       router.push("/");
     },
+  },
+  mounted() {
+    currentPageTitle.setTitle("My storage");
   },
 });
 </script>
@@ -32,7 +37,7 @@ export default defineComponent({
         @click="logUserOut"
       />
     </div>
-    <h3>Jonatn</h3>
+    <h3>{{ pageTitle }}</h3>
   </header>
 </template>
 
