@@ -1,4 +1,5 @@
-import { z, ZodError } from "zod";
+import { z } from "zod";
+import { validateSchema, formatErroMessage } from "./validateSchema";
 
 const formInputSchema = z.object({
   email: z
@@ -15,16 +16,10 @@ const formInputSchema = z.object({
     .min(10, { message: "Password must be at least 10 characters long" }),
 });
 
-export type FormInput = z.infer<typeof formInputSchema>;
+export type IFormInput = z.infer<typeof formInputSchema>;
 
-export const validateForm = (input: FormInput) => {
-  try {
-    formInputSchema.parse(input);
-  } catch (err: ZodError | unknown) {
-    if (err instanceof ZodError) {
-      return err.issues
-        .map((issue) => issue.message)
-        .reduce((message, error) => message + error + "\n", "");
-    }
-  }
+export const validateForm = (input: IFormInput) => {
+  const errors = validateSchema(formInputSchema, input);
+  if (errors) return formatErroMessage(errors);
+  return "";
 };
