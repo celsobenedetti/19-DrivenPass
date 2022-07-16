@@ -6,7 +6,7 @@ html {
   font-family: "Recursive", sans-serif;
 }
 
-main.page-wrapper {
+div.page-wrapper {
   @include flex;
   height: 100vh;
 

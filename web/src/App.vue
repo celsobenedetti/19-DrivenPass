@@ -1,8 +1,8 @@
 <template>
-  <main class="page-wrapper">
+  <div class="page-wrapper">
     <BannerHeader v-if="shouldRenderHeader" />
     <router-view />
-  </main>
+  </div>
   <!-- <nav v-if="shouldRenderHeader"> -->
   <!--   <router-link to="/">Home</router-link> -->
   <!--   <router-link to="/signup">signup</router-link> -->

@@ -4,10 +4,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import tokenAccess from "@/global/apiAccessToken";
 import router from "@/router";
-import { ref } from "vue";
 
 export default defineComponent({
   name: "HomeView",

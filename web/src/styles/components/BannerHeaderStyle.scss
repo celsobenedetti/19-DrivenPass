@@ -4,6 +4,8 @@ header {
   position: absolute;
   top: 0;
 
+  box-shadow: $shadow-one;
+
   div.header-top {
     @include flex($direction: row, $justify: space-between);
     width: 100%;
