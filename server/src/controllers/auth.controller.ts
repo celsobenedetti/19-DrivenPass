@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { SignUserReq } from "../models/auth";
+import { JwtHeaderReq, SignUserReq } from "../models/auth";
 import userService from "../services/user.service";
 
 const createAccount = async (req: SignUserReq, res: Response) => {
@@ -12,7 +12,10 @@ const signUserIn = async (req: SignUserReq, res: Response) => {
   res.status(200).send({ token });
 };
 
+const confirmValidJwt = (_req: JwtHeaderReq, res: Response) => res.sendStatus(200);
+
 export default {
   createAccount,
   signUserIn,
+  confirmValidJwt,
 };
