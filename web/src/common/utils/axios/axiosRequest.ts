@@ -1,9 +1,17 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestHeaders } from "axios";
+
+interface TokenHeader extends AxiosRequestHeaders {
+  authorization: string;
+}
 
 const API_URL = process.env.VUE_APP_API_URL;
 let waiting = false;
 
-export const postData = async (endpoint: string, payload: any) => {
+export const postData = async (
+  endpoint: string,
+  payload: any,
+  headers?: TokenHeader
+) => {
   let data: any, error: any;
   if (!waiting) {
     waiting = true;
@@ -11,10 +19,10 @@ export const postData = async (endpoint: string, payload: any) => {
     try {
       const { data: responseData } = await axios.post(
         `${API_URL}/${endpoint}`,
-        payload
+        payload,
+        { headers }
       );
       data = responseData;
-      console.log({ data });
     } catch (err) {
       error = err;
       if (err instanceof AxiosError) {
@@ -22,7 +30,6 @@ export const postData = async (endpoint: string, payload: any) => {
         const { data: errorData } = response;
         err.message = errorData.response;
       }
-      console.log({ error });
     } finally {
       waiting = false;
     }
