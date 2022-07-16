@@ -1,5 +1,6 @@
 import { postData } from "@/common/utils/axios";
 import { computed, reactive } from "vue";
+import router from "@/router";
 
 const jwt = reactive({
   token: "",
@@ -19,6 +20,7 @@ const getCachedToken = () => {
 const logUserOut = () => {
   localStorage.removeItem("token");
   jwt.token = "";
+  router.push("/signin");
 };
 
 const validateCachedToken = async () => {
@@ -38,4 +40,5 @@ export default {
   getToken,
   setToken,
   validateCachedToken,
+  logUserOut,
 };

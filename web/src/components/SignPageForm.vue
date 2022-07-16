@@ -87,7 +87,7 @@ export default defineComponent({
     <label for="username">Email </label>
     <input v-model="input.email" name="email" type="text" required />
     <label for="password">Password </label>
-    <input v-model="input.password" name="password" type="text" required />
+    <input v-model="input.password" name="password" type="password" required />
 
     <button @click="handleSubmit">
       {{ isSignUp ? "Sign Up" : "Login" }}

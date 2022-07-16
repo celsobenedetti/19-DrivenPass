@@ -1,7 +1,5 @@
 <template>
-  <main class="page-wrapper">
-    <SignPageForm :pageType="SignPageTypes.SIGNUP" />
-  </main>
+  <SignPageForm :pageType="SignPageTypes.SIGNUP" />
 </template>
 
 <script lang="ts">
@@ -17,5 +15,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss"></style>

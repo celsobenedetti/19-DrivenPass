@@ -1,7 +1,5 @@
 <template>
-  <main class="page-wrapper">
-    <SignPageForm :pageType="SignPageTypes.SIGNIN" />
-  </main>
+  <SignPageForm :pageType="SignPageTypes.SIGNIN" />
 </template>
 
 <script lang="ts">
