@@ -9,7 +9,7 @@ form {
     border: 1px solid $primary;
 
     &:focus {
-      background-color: lighten($color: $primary, $amount: 70);
+      background-color: lighten($color: $primary, $amount: 40);
     }
   }
 

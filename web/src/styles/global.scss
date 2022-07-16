@@ -10,4 +10,6 @@ main.page-wrapper {
 
   @include flex;
   height: 100vh;
+
+  color: $primary-dark;
 }
