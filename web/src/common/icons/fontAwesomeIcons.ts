@@ -7,6 +7,7 @@ import {
   faWifi,
   faAddressCard,
   faPlus,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const fontAwesomeIcons = [
@@ -18,4 +19,5 @@ export const fontAwesomeIcons = [
   faWifi,
   faAddressCard,
   faPlus,
+  faArrowLeft,
 ];

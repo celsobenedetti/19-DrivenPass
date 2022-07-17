@@ -19,8 +19,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/new",
-    name: "new",
-    component: () => import("../views/SignInView.vue"),
+    name: "newItem",
+    component: () => import("../views/NewItemView.vue"),
   },
 ];
 

@@ -12,13 +12,19 @@ export default defineComponent({
 
 <template>
   <div class="item-wrapper">
-    <div class="icon-title-wrapper">
+    <div class="icon-title-wrapper" @click="router.push(redirectTo)">
       <div class="icon-wrapper">
-        <slot name="icon">Teta</slot>
+        <slot name="icon"></slot>
       </div>
       <h1>{{ title }}</h1>
     </div>
-    <p class="item-count" @click="router.push(redirectTo)">{{ itemsCount }}</p>
+    <p
+      v-if="itemsCount >= 0"
+      class="item-count"
+      @click="router.push(redirectTo)"
+    >
+      {{ itemsCount }}
+    </p>
   </div>
 </template>
 
