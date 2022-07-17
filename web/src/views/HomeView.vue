@@ -4,6 +4,7 @@ import tokenAccess from "@/global/apiAccessToken";
 import router from "@/router";
 import { fetchAllUserItems } from "@/common/utils/axios";
 import userItems from "@/global/userItems";
+import currentPageTitle from "@/global/currentPageTitle";
 
 import Item from "@/components/HomeStorageItem.vue";
 
@@ -22,6 +23,7 @@ export default defineComponent({
     const token = await tokenAccess.validateCachedToken();
     if (!token) return router.push("/signin");
 
+    currentPageTitle.setTitle("My storage");
     this.token = token;
     await fetchAllUserItems();
   },

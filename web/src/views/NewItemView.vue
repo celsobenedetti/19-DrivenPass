@@ -2,6 +2,7 @@
 import { defineComponent } from "vue";
 import tokenAccess from "@/global/apiAccessToken";
 import router from "@/router";
+import currentPageTitle from "@/global/currentPageTitle";
 
 import Item from "@/components/HomeStorageItem.vue";
 
@@ -16,6 +17,7 @@ export default defineComponent({
   async mounted() {
     const token = await tokenAccess.validateCachedToken();
     if (!token) return router.push("/signin");
+    else currentPageTitle.setTitle("Add new item");
   },
 });
 </script>
