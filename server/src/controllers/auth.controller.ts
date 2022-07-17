@@ -3,8 +3,8 @@ import { JwtHeaderReq, SignUserReq } from "../models/auth";
 import userService from "../services/user.service";
 
 const createAccount = async (req: SignUserReq, res: Response) => {
-  const newUser = await userService.create(req.body);
-  res.status(201).send(newUser);
+  const token = await userService.create(req.body);
+  res.status(201).send({ token });
 };
 
 const signUserIn = async (req: SignUserReq, res: Response) => {
