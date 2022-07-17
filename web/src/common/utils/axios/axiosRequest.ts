@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosRequestHeaders } from "axios";
 import accessToken from "@/global/apiAccessToken";
-import { Card, Credential, ItemList, Note, Wifi } from "../validation";
+import axios, { AxiosError, AxiosRequestHeaders } from "axios";
+import { ItemList } from "../validation";
 
 interface TokenHeader extends AxiosRequestHeaders {
   authorization: string;
@@ -24,6 +24,9 @@ export const usePost = async (
   let data: any, error: any;
   if (!waiting) {
     waiting = true;
+
+    const token = accessToken.getToken;
+    if (token && !headers) headers = accessToken.getHeader();
 
     try {
       const { data: responseData } = await axios.post(

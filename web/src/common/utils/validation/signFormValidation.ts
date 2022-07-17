@@ -18,7 +18,7 @@ const formInputSchema = z.object({
 
 export type IFormInput = z.infer<typeof formInputSchema>;
 
-export const validateForm = (input: IFormInput) => {
+export const validateSignForm = (input: IFormInput) => {
   const errors = validateSchema(formInputSchema, input);
   if (errors) return formatErroMessage(errors);
   return "";

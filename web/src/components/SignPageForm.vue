@@ -3,7 +3,7 @@ import { SignFormProps, SignPageTypes } from "@/common/types";
 import ModalAlert from "@/components/ModalAlert.vue";
 import LockLogo from "@/components/LockLogo.vue";
 import { ref, defineComponent, PropType } from "vue";
-import { validateForm, IFormInput } from "@/common/utils/validation";
+import { validateSignForm, IFormInput } from "@/common/utils/validation";
 import { usePost } from "@/common/utils/axios";
 import accessToken from "@/global/apiAccessToken";
 import router from "@/router";
@@ -42,7 +42,7 @@ export default defineComponent({
 
   methods: {
     async handleSubmit() {
-      const modalMessage = validateForm(this.input);
+      const modalMessage = validateSignForm(this.input);
       if (modalMessage) {
         return this.renderModal({
           title: "Invalid input",

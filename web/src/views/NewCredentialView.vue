@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { CredentialSchema } from "@/common/utils/validation";
 import Form from "@/components/NewItemForm.vue";
 
 export default defineComponent({
@@ -8,20 +9,26 @@ export default defineComponent({
   },
   setup() {
     const formInput = {
-      title: "",
-      username: "",
-      password: "",
-      url: "",
+      title: undefined,
+      username: undefined,
+      password: undefined,
+      url: undefined,
     };
 
-    return { formInput };
+    return { formInput, CredentialSchema };
   },
 });
 </script>
 
 <template>
   <main class="container">
-    <Form :inputObject="formInput" title="Credential" redirectTo="/" />
+    <Form
+      :inputObject="formInput"
+      :formSchema="CredentialSchema"
+      title="Credential"
+      apiEndpoint="credentials"
+      redirectTo="/"
+    />
   </main>
 </template>
 

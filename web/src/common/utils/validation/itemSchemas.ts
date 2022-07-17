@@ -1,4 +1,5 @@
-import { z } from "zod";
+import { z, ZodSchema } from "zod";
+import { formatErroMessage, validateSchema } from ".";
 
 const CARD_NUMBER = /[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}/;
 const SECURITY_CODE = /[0-9]{3}/;
@@ -60,3 +61,9 @@ export type Document = z.infer<typeof DocSchema>;
 
 export type Item = Credential | Note | Card | Wifi | Document;
 export type ItemList = Credential[] | Note[] | Card[] | Wifi[] | Document[];
+
+export const validateForm = (schema: ZodSchema, input: Item) => {
+  const errors = validateSchema(schema, input);
+  if (errors) return formatErroMessage(errors);
+  return "";
+};
