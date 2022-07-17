@@ -25,7 +25,7 @@ export default defineComponent({
       password: "",
     });
 
-    const errorMessage = ref({
+    const modalMessage = ref({
       title: "",
       content: "",
     });
@@ -36,17 +36,17 @@ export default defineComponent({
       isSignUp,
       input,
       isLoading,
-      errorMessage,
+      modalMessage,
     };
   },
 
   methods: {
     async handleSubmit() {
-      const errorMessage = validateForm(this.input);
-      if (errorMessage) {
-        return this.alertErrors({
+      const modalMessage = validateForm(this.input);
+      if (modalMessage) {
+        return this.renderModal({
           title: "Invalid input",
-          content: errorMessage,
+          content: modalMessage,
         });
       }
 
@@ -57,18 +57,30 @@ export default defineComponent({
       this.isLoading = false;
 
       if (error) {
-        return this.alertErrors({
+        return this.renderModal({
           title: "Request was unsuccessful",
           content: error.message,
         });
       }
 
       accessToken.setToken(data.token);
-      router.push("/");
+
+      if (!this.isSignUp) router.push("/");
+      else {
+        this.renderModal({
+          title: "Nice!",
+          content: "Registration successfully completed",
+        });
+      }
     },
 
-    alertErrors(error: { title: string; content: string }) {
-      this.errorMessage = error;
+    renderModal(message: { title: string; content: string }) {
+      this.modalMessage = message;
+    },
+
+    closeModal() {
+      if (accessToken.getToken.value) router.push("/");
+      else this.modalMessage = {};
     },
   },
 
@@ -108,10 +120,10 @@ export default defineComponent({
   </form>
 
   <ModalAlert
-    v-if="errorMessage.content"
-    :title="errorMessage.title"
-    :content="errorMessage.content"
-    @close-modal="errorMessage = {}"
+    v-if="modalMessage.content"
+    :title="modalMessage.title"
+    :content="modalMessage.content"
+    @close-modal="closeModal"
   />
 </template>
 
