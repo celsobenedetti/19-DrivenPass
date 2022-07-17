@@ -24,7 +24,7 @@ export default defineComponent({
 
 <template>
   <!-- <div v-if="!token">Loading...</div> -->
-  <div class="home">
+  <main class="container">
     <Item title="Credentials" redirectTo="/credentials/new" :itemsCount="-1">
       <template #icon>
         <font-awesome-icon icon="fa-solid fa-key" />
@@ -58,7 +58,7 @@ export default defineComponent({
     <div class="icon arrow-icon" @click="router.push('/')">
       <font-awesome-icon icon="fa-solid fa-arrow-left" />
     </div>
-  </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>

@@ -49,7 +49,7 @@ export default defineComponent({
 
 <template>
   <div v-if="!token">Loading...</div>
-  <div v-else class="home">
+  <main v-else class="container">
     <Item
       title="Credentials"
       redirectTo="/credentials"
@@ -91,7 +91,7 @@ export default defineComponent({
     <div class="icon add-icon" @click="router.push('/new')">
       <font-awesome-icon icon="fa-solid fa-plus" />
     </div>
-  </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>

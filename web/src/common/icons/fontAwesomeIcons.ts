@@ -8,6 +8,8 @@ import {
   faAddressCard,
   faPlus,
   faArrowLeft,
+  faX,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const fontAwesomeIcons = [
@@ -20,4 +22,6 @@ export const fontAwesomeIcons = [
   faAddressCard,
   faPlus,
   faArrowLeft,
+  faX,
+  faCheck,
 ];

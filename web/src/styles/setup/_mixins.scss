@@ -9,7 +9,8 @@
 @mixin input() {
   font-family: "Recursive", sans-serif;
   font-size: $font-sm;
-  width: $input-w;
+  min-width: $input-w;
+  width: 100%;
   height: $input-h;
   padding: 10px;
   border-radius: $bd-radius-sm;

@@ -33,3 +33,7 @@ $bd-radius-sm: 5px;
 $bd-radius-md: 10px;
 
 $shadow-one: 0px 4px 4px 0px #00000026;
+
+$header-top-h: 15vh;
+$header-bottom-h: 40px;
+$header-height: calc($header-top-h + $header-bottom-h);

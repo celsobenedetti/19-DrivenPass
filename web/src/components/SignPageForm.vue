@@ -128,5 +128,6 @@ export default defineComponent({
 </template>
 
 <style scoped lang="scss">
+@import "@/styles/components/FormsStyle";
 @import "@/styles/components/SignPageFormStyle";
 </style>

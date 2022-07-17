@@ -1,0 +1,21 @@
+form {
+  font-family: "Recursive", sans-serif;
+  @include flex($gap: 1rem);
+  width: 85%;
+  max-width: 600px;
+  height: 55%;
+  font-size: $font-md1;
+
+  input {
+    @include input;
+    border: 1px solid $primary;
+
+    &:focus {
+      background-color: lighten($color: $primary, $amount: 40);
+    }
+  }
+
+  button {
+    @include button;
+  }
+}

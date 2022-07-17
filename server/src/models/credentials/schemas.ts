@@ -7,4 +7,4 @@ export const CreateCredentialSchema = z.object({
   password: z.string(),
 });
 
-export type createCredentialDto = z.infer<typeof CreateCredentialSchema>
+export type createCredentialDto = z.infer<typeof CreateCredentialSchema>;

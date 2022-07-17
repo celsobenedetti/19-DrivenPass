@@ -15,8 +15,6 @@ const items = reactive({
   documents: <Array<Document>>[],
 });
 
-const getItems = computed(() => items);
-
 const setCredentials = (credentials: Credential[]) => {
   items.credentials = credentials;
 };
@@ -36,6 +34,13 @@ const setDocuments = (document: Document[]) => {
   items.documents = document;
 };
 
+const getItems = computed(() => items);
+const getCredentials = computed(() => items.credentials);
+const getNotes = computed(() => items.notes);
+const getCards = computed(() => items.cards);
+const getWifis = computed(() => items.wifis);
+const getDocuments = computed(() => items.documents);
+
 export default {
   getItems,
   setCredentials,
@@ -43,4 +48,9 @@ export default {
   setCards,
   setWifis,
   setDocuments,
+  getCredentials,
+  getNotes,
+  getWifis,
+  getCards,
+  getDocuments,
 };
