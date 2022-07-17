@@ -32,6 +32,29 @@ const routes: Array<RouteRecordRaw> = [
     name: "newCredential",
     component: () => import("../views/NewCredentialView.vue"),
   },
+
+  {
+    path: "/notes/new",
+    name: "newNote",
+    component: () => import("../views/NewNoteView.vue"),
+  },
+  {
+    path: "/cards/new",
+    name: "newCard",
+    component: () => import("../views/NewCardView.vue"),
+  },
+
+  {
+    path: "/wifis/new",
+    name: "newWifi",
+    component: () => import("../views/NewWifiView.vue"),
+  },
+
+  {
+    path: "/documents/new",
+    name: "newDocument",
+    component: () => import("../views/NewDocumentView.vue"),
+  },
 ];
 
 const router = createRouter({

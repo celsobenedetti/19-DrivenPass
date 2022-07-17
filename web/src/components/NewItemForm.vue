@@ -39,7 +39,6 @@ export default defineComponent({
   },
   methods: {
     async handleSubmit() {
-      console.log("eae");
       const errorMessage = validateForm(this.formSchema, this.formInput);
       if (errorMessage) {
         return this.renderModal({

@@ -3,7 +3,6 @@ form {
   @include flex($gap: 1rem);
   width: 85%;
   max-width: 600px;
-  height: 55%;
   font-size: $font-md1;
 
   input {
