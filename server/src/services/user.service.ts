@@ -33,7 +33,7 @@ const validateCredentials = async (userData: SignUserDto) => {
   const user = await findUserByEmail(email);
 
   if (!user) throw new NotFoundException("Email not registered");
-  if (!utils.compareHash(password, user.password))
+  if (!(await utils.compareHash(password, user.password)))
     throw new UnauthorizedException("Invalid credentials");
 
   return utils.createJwt(user.id, email);
