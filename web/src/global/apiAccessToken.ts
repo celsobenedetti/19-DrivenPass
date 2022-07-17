@@ -1,4 +1,4 @@
-import { postData } from "@/common/utils/axios";
+import { usePost } from "@/common/utils/axios";
 import { computed, reactive } from "vue";
 import router from "@/router";
 
@@ -23,12 +23,16 @@ const logUserOut = () => {
   router.push("/signin");
 };
 
+const getHeader = () => {
+  return { authorization: `Bearer ${getToken.value}` };
+};
+
 const validateCachedToken = async () => {
   const token = getCachedToken();
 
   if (token) {
     const requestHeader = { authorization: `Bearer ${token}` };
-    const { error } = await postData("auth/check", {}, requestHeader);
+    const { error } = await usePost("auth/check", {}, requestHeader);
 
     if (error) logUserOut();
     else setToken(token);
@@ -41,4 +45,5 @@ export default {
   setToken,
   validateCachedToken,
   logUserOut,
+  getHeader,
 };

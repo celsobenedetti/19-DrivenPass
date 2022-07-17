@@ -4,7 +4,7 @@ import ModalAlert from "@/components/ModalAlert.vue";
 import LockLogo from "@/components/LockLogo.vue";
 import { ref, defineComponent, PropType } from "vue";
 import { validateForm, IFormInput } from "@/common/utils/validation";
-import { postData } from "@/common/utils/axios";
+import { usePost } from "@/common/utils/axios";
 import accessToken from "@/global/apiAccessToken";
 import router from "@/router";
 
@@ -53,7 +53,7 @@ export default defineComponent({
       const endpoint = this.isSignUp ? "signup" : "signin";
 
       this.isLoading = true;
-      const { data, error } = await postData(endpoint, this.input);
+      const { data, error } = await usePost(endpoint, this.input);
       this.isLoading = false;
 
       if (error) {

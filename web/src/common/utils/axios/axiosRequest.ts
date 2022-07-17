@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosRequestHeaders } from "axios";
+import accessToken from "@/global/apiAccessToken";
+import { Card, Credential, ItemList, Note, Wifi } from "../validation";
 
 interface TokenHeader extends AxiosRequestHeaders {
   authorization: string;
@@ -7,7 +9,14 @@ interface TokenHeader extends AxiosRequestHeaders {
 const API_URL = process.env.VUE_APP_API_URL;
 let waiting = false;
 
-export const postData = async (
+const extractErrorMessage = (error: AxiosError) => {
+  console.log({ error });
+  const { response } = error;
+  const { data } = response as any;
+  return data?.response;
+};
+
+export const usePost = async (
   endpoint: string,
   payload: any,
   headers?: TokenHeader
@@ -26,12 +35,29 @@ export const postData = async (
     } catch (err) {
       error = err;
       if (err instanceof AxiosError) {
-        const { response } = err;
-        const { data: errorData } = response;
-        err.message = errorData.response;
+        error.message = extractErrorMessage(err);
       }
     } finally {
       waiting = false;
+    }
+  }
+  return { data, error };
+};
+
+export const useGet = async (
+  endpoint: string
+): Promise<{ error: any; data: ItemList }> => {
+  const headers = accessToken.getHeader();
+  let data: any, error: any;
+  try {
+    const { data: responseData } = await axios.get(`${API_URL}/${endpoint}`, {
+      headers,
+    });
+    data = responseData;
+  } catch (err) {
+    error = err;
+    if (err instanceof AxiosError) {
+      error.message = extractErrorMessage(err);
     }
   }
   return { data, error };
