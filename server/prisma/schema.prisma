@@ -67,7 +67,7 @@ model Card {
   securityCode   String
   expirationDate String
   password       String
-  isVirtual      Boolean
+  isVirtual      Boolean  @default(false)
   type           CardType
 
   user_id Int

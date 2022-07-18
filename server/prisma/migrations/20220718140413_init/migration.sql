@@ -50,7 +50,7 @@ CREATE TABLE "cards" (
     "securityCode" TEXT NOT NULL,
     "expirationDate" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "isVirtual" BOOLEAN NOT NULL,
+    "isVirtual" BOOLEAN NOT NULL DEFAULT false,
     "type" "CardType" NOT NULL,
     "user_id" INTEGER NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
