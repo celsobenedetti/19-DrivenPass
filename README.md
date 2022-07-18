@@ -51,7 +51,7 @@
   - `401` - Auth errors
   - `404` - Resource not found 
   - `409` - Resource conflict on POST requests
-  - `422` - Body validation erro on POST requests
+  - `422` - Body validation error on POST requests
 
 ### Auth
 
