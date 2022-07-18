@@ -8,7 +8,7 @@ import accessToken from "@/global/apiAccessToken";
 export default defineComponent({
   setup() {
     const pageTitle = currentPageTitle.getTitle;
-    return { pageTitle };
+    return { pageTitle, router };
   },
   methods: {
     logUserOut() {

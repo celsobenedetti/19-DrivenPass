@@ -27,6 +27,30 @@ const routes: Array<RouteRecordRaw> = [
     name: "credentials",
     component: () => import("../views/CredentialsView.vue"),
   },
+
+  {
+    path: "/notes",
+    name: "notes",
+    component: () => import("../views/NotesView.vue"),
+  },
+
+  {
+    path: "/cards",
+    name: "cards",
+    component: () => import("../views/CardsView.vue"),
+  },
+
+  {
+    path: "/wifis",
+    name: "wifis",
+    component: () => import("../views/WifisView.vue"),
+  },
+  {
+    path: "/documents",
+    name: "documents",
+    component: () => import("../views/DocumentsView.vue"),
+  },
+
   {
     path: "/credentials/new",
     name: "newCredential",
@@ -54,6 +78,28 @@ const routes: Array<RouteRecordRaw> = [
     path: "/documents/new",
     name: "newDocument",
     component: () => import("../views/NewDocumentView.vue"),
+  },
+  {
+    path: "/credentials/:id",
+    component: () => import("../views/DisplayCredentialView.vue"),
+  },
+  {
+    path: "/notes/:id",
+    component: () => import("../views/DisplayNoteView.vue"),
+  },
+  {
+    path: "/cards/:id",
+    component: () => import("../views/DisplayCardView.vue"),
+  },
+
+  {
+    path: "/wifis/:id",
+    component: () => import("../views/DisplayWifiView.vue"),
+  },
+
+  {
+    path: "/documents/:id",
+    component: () => import("../views/DisplayDocumentView.vue"),
   },
 ];
 

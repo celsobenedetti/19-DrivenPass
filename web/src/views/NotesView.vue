@@ -10,11 +10,11 @@ export default defineComponent({
     Item,
   },
   setup() {
-    const credentials = ref(userItems.getCredentials);
-    return { credentials };
+    const notes = ref(userItems.getNotes);
+    return { notes };
   },
   mounted() {
-    currentPageTitle.setTitle("Your credentials");
+    currentPageTitle.setTitle("Your notes");
   },
 });
 </script>
@@ -22,10 +22,10 @@ export default defineComponent({
 <template>
   <main class="container">
     <Item
-      v-for="(credential, index) of credentials"
-      :title="credential.title"
-      :key="credential.title"
-      :redirectTo="`/credentials/${index}`"
+      v-for="(note, index) of notes"
+      :title="note.title"
+      :key="note.title"
+      :redirectTo="`/notes/${index}`"
       :itemsCount="-1"
     >
       <template #icon>
@@ -34,5 +34,3 @@ export default defineComponent({
     </Item>
   </main>
 </template>
-
-<style lang="scss" scoped></style>

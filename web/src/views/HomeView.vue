@@ -48,7 +48,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="!token">Loading...</div>
+  <main v-if="!token" class="container">Loading...</main>
   <main v-else class="container">
     <Item
       title="Credentials"
