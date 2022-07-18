@@ -21,3 +21,21 @@ main.container {
   padding: $padding-1 0;
   overflow-y: scroll;
 }
+
+div.icon {
+  position: absolute;
+  bottom: 0;
+
+  padding: $padding-2;
+  margin: 2rem;
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+div.add-icon {
+  right: 0;
+
+  background-color: $primary;
+  color: $text-light;
+}

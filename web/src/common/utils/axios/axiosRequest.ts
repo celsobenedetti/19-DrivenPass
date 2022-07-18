@@ -10,7 +10,6 @@ const API_URL = process.env.VUE_APP_API_URL;
 let waiting = false;
 
 const extractErrorMessage = (error: AxiosError) => {
-  console.log({ error });
   const { response } = error;
   const { data } = response as any;
   return data?.response;
@@ -26,7 +25,7 @@ export const usePost = async (
     waiting = true;
 
     const token = accessToken.getToken;
-    if (token && !headers) headers = accessToken.getHeader();
+    if (token && !headers) headers = await accessToken.getHeader();
 
     try {
       const { data: responseData } = await axios.post(
@@ -50,7 +49,7 @@ export const usePost = async (
 export const useGet = async (
   endpoint: string
 ): Promise<{ error: any; data: ItemList }> => {
-  const headers = accessToken.getHeader();
+  const headers = await accessToken.getHeader();
   let data: any, error: any;
   try {
     const { data: responseData } = await axios.get(`${API_URL}/${endpoint}`, {
@@ -70,7 +69,7 @@ export const useDelete = async (
   endpoint: string,
   id: string
 ): Promise<{ error: any }> => {
-  const headers = accessToken.getHeader();
+  const headers = await accessToken.getHeader();
   let error: any;
   try {
     await axios.delete(`${API_URL}/${endpoint}/${id}`, { headers });

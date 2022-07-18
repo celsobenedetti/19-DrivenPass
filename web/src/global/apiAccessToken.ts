@@ -23,7 +23,8 @@ const logUserOut = () => {
   router.push("/signin");
 };
 
-const getHeader = () => {
+const getHeader = async () => {
+  await validateCachedToken();
   return { authorization: `Bearer ${getToken.value}` };
 };
 

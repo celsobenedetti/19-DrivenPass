@@ -1,2 +1,2 @@
 export * from "./axiosRequest";
-export * from "./fetchAllUserItems";
+export * from "./fetchUserItems";
