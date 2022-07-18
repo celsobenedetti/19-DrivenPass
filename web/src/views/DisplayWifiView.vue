@@ -17,6 +17,6 @@ export default defineComponent({
 
 <template>
   <main class="container">
-    <ItemDisplay :item="wifis[$route.params.id]" />
+    <ItemDisplay :item="wifis[$route.params.id]" apiDeleteEndpoint="wifi" />
   </main>
 </template>

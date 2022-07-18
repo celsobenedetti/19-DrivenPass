@@ -65,3 +65,20 @@ export const useGet = async (
   }
   return { data, error };
 };
+
+export const useDelete = async (
+  endpoint: string,
+  id: string
+): Promise<{ error: any }> => {
+  const headers = accessToken.getHeader();
+  let error: any;
+  try {
+    await axios.delete(`${API_URL}/${endpoint}/${id}`, { headers });
+  } catch (err) {
+    error = err;
+    if (err instanceof AxiosError) {
+      error.message = extractErrorMessage(err);
+    }
+  }
+  return { error };
+};

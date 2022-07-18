@@ -21,6 +21,8 @@ export const fetchAllUserItems = async () => {
   const { data: wifi } = (await useGet("wifi")) as ItemData<Wifi>;
   const { data: documents } = (await useGet("docs")) as ItemData<Document>;
 
+  console.log({ cards });
+
   userItems.setCredentials(credentials);
   userItems.setNotes(notes);
   userItems.setCards(cards);

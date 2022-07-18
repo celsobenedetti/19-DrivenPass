@@ -17,7 +17,10 @@ export default defineComponent({
 
 <template>
   <main class="container">
-    <ItemDisplay :item="credentials[$route.params.id]" />
+    <ItemDisplay
+      :item="credentials[$route.params.id]"
+      apiDeleteEndpoint="credentials"
+    />
   </main>
 </template>
 
