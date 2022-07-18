@@ -32,7 +32,6 @@ export const fetchCredentials = async () => {
   const { data: credentials } = (await useGet(
     "credentials"
   )) as ItemData<Credential>;
-  console.log({ credentials });
   userItems.setCredentials(credentials);
 };
 

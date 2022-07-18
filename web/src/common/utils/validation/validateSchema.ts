@@ -4,7 +4,6 @@ export const validateSchema = (schema: ZodSchema, data: any) => {
   try {
     schema.parse(data);
   } catch (err: ZodError | unknown) {
-    console.log({ err });
     if (err instanceof ZodError) {
       return err.issues.map((issue) => issue.message);
     }
