@@ -11,7 +11,6 @@ export const createCardSchema = z.object({
   securityCode: z.string().regex(SECURITY_CODE),
   expirationDate: z.string(),
   password: z.string(),
-  isVirtual: z.boolean(),
   type: z.nativeEnum(CardType),
 });
 
