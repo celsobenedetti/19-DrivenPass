@@ -23,7 +23,7 @@ export default defineComponent({
   <main class="container">
     <Form
       :inputObject="formInput"
-      :formSchema="Wifichema"
+      :formSchema="WifiSchema"
       title="Wifi"
       apiEndpoint="wifi"
       redirectTo="/"
