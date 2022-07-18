@@ -27,7 +27,7 @@ const create = async (userId: number, data: createNoteDto) => {
 
 const findAll = async (userId: number) => {
   return prismaService.note.findMany({
-    select: { title: true, content: true },
+    select: { id: true, title: true, content: true },
     where: { user_id: userId },
   });
 };

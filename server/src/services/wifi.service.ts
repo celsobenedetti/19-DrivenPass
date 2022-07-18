@@ -28,7 +28,7 @@ const create = async (userId: number, data: createWifiDto) => {
 
 const findAll = async (userId: number) => {
   const wifis = await prismaService.wifi.findMany({
-    select: { title: true, network: true, password: true },
+    select: { id: true, title: true, network: true, password: true },
     where: { user_id: userId },
   });
 

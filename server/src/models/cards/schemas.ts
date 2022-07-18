@@ -17,6 +17,7 @@ export const createCardSchema = z.object({
 export type createCardDto = z.infer<typeof createCardSchema>;
 
 export const findCardFilter = {
+  id: true,
   title: true,
   number: true,
   cardholderName: true,

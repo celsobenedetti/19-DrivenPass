@@ -30,7 +30,7 @@ const createCredential = async (userId: number, data: createCredentialDto) => {
 
 const findAll = async (userId: number) => {
   const credentials = await prismaService.credential.findMany({
-    select: { title: true, url: true, username: true, password: true },
+    select: { id: true, title: true, url: true, username: true, password: true },
     where: { user_id: userId },
   });
 

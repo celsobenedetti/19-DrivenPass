@@ -19,7 +19,7 @@ const create = async (userId: number, data: createDocDto) => {
 
 const findAll = async (userId: number) => {
   return prismaService.document.findMany({
-    select: { number: true, type: true },
+    select: { id: true, number: true, type: true },
     where: { user_id: userId },
   });
 };
